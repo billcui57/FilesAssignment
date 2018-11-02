@@ -37,9 +37,11 @@ public class TextIOAssignment {
 
         ArrayList<User> user = new ArrayList<User>();
         ArrayList<String> lines = new ArrayList<String>();
+        
         while (reader.hasNext()) {
             lines.add(reader.next());
         }
+        reader.close();
 
         for (int i = 0; i < lines.size(); i++) {
             String[] line = lines.get(i).split(",");
@@ -66,7 +68,9 @@ public class TextIOAssignment {
                     
                     User newUser = new User(firstName, lastName, username, password);
                     user.add(newUser);
+                   
                     writer.println(newUser.toString());
+                    writer.close();
                     loop = false;
                     break;
                 case "O":
@@ -129,10 +133,18 @@ public class TextIOAssignment {
             }
         } while (loop);
 
-        writer.close();
-        reader.close();
+       
+        
     }
 
+    public static void updateFile(User members,File file) throws IOException{
+        PrintWriter writer = new PrintWriter(new FileWriter(file, true));
+    }
+    
+    
+    
+    
+    
     public static boolean isGoodPassword(String testPassword) throws FileNotFoundException {
         File dictionary = new File("dictbadpass.txt");
         Scanner reader = new Scanner(dictionary);
