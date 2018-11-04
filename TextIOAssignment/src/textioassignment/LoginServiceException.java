@@ -9,9 +9,9 @@ package textioassignment;
  *
  * @author billc
  */
-public class PasswordException extends Exception {
+public class LoginServiceException extends Exception{
     
-    public PasswordException(String message) {
+     public LoginServiceException(String message) {
         super(message);
     }
 }

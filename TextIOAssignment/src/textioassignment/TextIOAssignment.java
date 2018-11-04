@@ -22,7 +22,7 @@ public class TextIOAssignment {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws FileNotFoundException {
+    public  void main(String[] args) throws FileNotFoundException {
         // TODO code application logic here
         File file = new File("info.txt");
         Scanner input = new Scanner(System.in);
@@ -69,8 +69,7 @@ public class TextIOAssignment {
                     User newUser = new User(firstName, lastName, username, password);
                     user.add(newUser);
                    
-                    writer.println(newUser.toString());
-                    writer.close();
+                    updateFile(user,file);
                     loop = false;
                     break;
                 case "O":
@@ -109,7 +108,7 @@ public class TextIOAssignment {
                                     System.out.println("Enter your new password!");
                                     String newPassword = newPassword();
                                     user.get(referredIndex).setPassword(newPassword);
-                                    //code for editing file for new password
+                                    updateFile(user,file);
                                     break;
                                 case "N":
                                     System.out.println("K bye then");
@@ -137,8 +136,18 @@ public class TextIOAssignment {
         
     }
 
-    public static void updateFile(User members,File file) throws IOException{
-        PrintWriter writer = new PrintWriter(new FileWriter(file, true));
+    public static void updateFile(ArrayList<User> members,File file) {
+        PrintWriter writer = null;
+        try {
+            writer = new PrintWriter(new FileWriter(file));
+            for(int i=0;i<members.size();i++){
+                writer.println(members.get(i).toString());
+            }   writer.close();
+        } catch (IOException ex) {
+            Logger.getLogger(TextIOAssignment.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            writer.close();
+        }
     }
     
     
@@ -181,7 +190,8 @@ public class TextIOAssignment {
         return password;
 
     }
-
+    
+    
     public static String encrypt(String raw) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
