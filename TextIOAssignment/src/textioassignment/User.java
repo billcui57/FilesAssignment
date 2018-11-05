@@ -16,6 +16,13 @@ public class User {
     private String firstName;
     private String lastName;
 
+    /**
+     * Constructor for user
+     * @param newFirstName first name
+     * @param newLastName last name
+     * @param newUsername username
+     * @param newPassword password
+     */
     public User(String newFirstName,String newLastName,String newUsername,String newPassword){
         this.setFirstName(newFirstName);
         this.setLastName(newLastName);
@@ -28,10 +35,20 @@ public class User {
     }
     
     @Override
+    
+    /**
+     * returns user class in string format
+     * @return returns user class in string format
+     */
     public String toString(){
+        //returns string format of instance
         return firstName+","+lastName+","+username+","+password;
     }
     
+    /**
+     * sets username
+     * @param newUsername new username to set to
+     */
     public void setUserName(String newUsername) {
         username = newUsername;
     }

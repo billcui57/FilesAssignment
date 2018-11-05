@@ -5,6 +5,7 @@
  */
 package textioassignment;
 
+import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -212,10 +213,25 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         String testUsername = jTextField1.getText();
         String testPassword = jTextField2.getText();
+        
+        BufferedImage captcha;
+        
+       
 
         try {
             if (login.isCorrectPassword(login.getUser(login.getIndexOfUsername(testUsername)), testPassword)) {
+
                 drawingPanel1.scene = 1;
+                drawingPanel1.repaint();
+                jButton1.setVisible(false);
+                jButton2.setVisible(false);
+                jButton3.setVisible(false);
+                jLabel1.setVisible(false);
+                jLabel2.setVisible(false);
+                jLabel3.setVisible(false);
+                jLabel4.setVisible(false);
+                jTextField1.setVisible(false);
+                jTextField2.setVisible(false);
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Incorrect Password!");
             }
@@ -223,16 +239,6 @@ public class MainFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, ex);
         }
 
-        drawingPanel1.repaint();
-        jButton1.setVisible(false);
-        jButton2.setVisible(false);
-        jButton3.setVisible(false);
-        jLabel1.setVisible(false);
-        jLabel2.setVisible(false);
-        jLabel3.setVisible(false);
-        jLabel4.setVisible(false);
-        jTextField1.setVisible(false);
-        jTextField2.setVisible(false);
 
     }//GEN-LAST:event_jButton2ActionPerformed
 

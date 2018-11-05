@@ -24,6 +24,25 @@ public class TextIOAssignment {
      */
     public  void main(String[] args) throws FileNotFoundException {
         // TODO code application logic here
+        
+        //Pseudocode for basic functions
+        //convert the file of users into an arraylist of users
+        //Asks if person is a new user or existing user
+            //if new user
+                    //gets first name and last name
+                    //gets username and ensures that it is a unique username
+                    //gets passwords and ensures that it is a good password
+            //if existing user
+                    //gets username and ensures that that username exists in the system
+                            //if username exists
+                                    //gets password
+                                            //if password is correct for that username
+                                                    //user is logged in
+                                            //else
+                                                    //user is not logged in and is asked to try again
+        
+
+        
         File file = new File("info.txt");
         Scanner input = new Scanner(System.in);
         PrintWriter writer = null;
