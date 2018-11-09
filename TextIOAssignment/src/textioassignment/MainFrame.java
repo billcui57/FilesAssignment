@@ -173,14 +173,18 @@ public class MainFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+ 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
+        //New User
+        
+        //Popup input for first and last name
         String newFirstname = JOptionPane.showInputDialog("Enter your first name", "");
         String newLastname = JOptionPane.showInputDialog("Enter your last name", "");
         String newUsername = null;
         do {
-
+            //keeps nagging the user to enter in username until it is unique
             newUsername = JOptionPane.showInputDialog("Enter new username", "");
             if (login.userExists(newUsername)) {
                 JOptionPane.showMessageDialog(rootPane, "User already exists!");
@@ -192,6 +196,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         try {
             do {
+                //keeps asking the user for password until the password entered is a good password
                 newPassword = JOptionPane.showInputDialog("Enter new password", "");
                 if (!login.isGoodPassword(newPassword)) {
                     JOptionPane.showMessageDialog(rootPane, "Terrible Password!");
@@ -201,7 +206,9 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //encrypts the new password
         newPassword = login.encrypt(newPassword);
+        //updates the file with new user
         User newUser = new User(newFirstname, newLastname, newUsername, newPassword);
         login.user.add(newUser);
         login.updateFile();
@@ -210,13 +217,16 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        
+        //Login
+        
         String testUsername = jTextField1.getText();
         String testPassword = jTextField2.getText();
         
         BufferedImage captcha;
         
        
-
+        //if password is correct and user exists then proceeds to next scene
         try {
             if (login.isCorrectPassword(login.getUser(login.getIndexOfUsername(testUsername)), testPassword)) {
 
@@ -235,7 +245,7 @@ public class MainFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Incorrect Password!");
             }
         } catch (LoginServiceException ex) {
-            JOptionPane.showMessageDialog(rootPane, ex);
+            JOptionPane.showMessageDialog(rootPane, "No Such User!");
         }
 
 
@@ -243,8 +253,13 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        
+        // Change password
+        
+        
         String existingUsername = null;
         do {
+            //makes sure username exists
             existingUsername = JOptionPane.showInputDialog("Enter username", "");
             if (!login.userExists(existingUsername)) {
                 JOptionPane.showMessageDialog(rootPane, "No such user!");
@@ -254,6 +269,7 @@ public class MainFrame extends javax.swing.JFrame {
         String existingPassword = null;
         try {
             do {
+                //enters a new and good password
                 existingPassword = JOptionPane.showInputDialog("Enter new password", "");
                 if (!login.isGoodPassword(existingPassword)) {
                     JOptionPane.showMessageDialog(rootPane, "Terrible Password!");
@@ -266,6 +282,7 @@ public class MainFrame extends javax.swing.JFrame {
         existingPassword = login.encrypt(existingPassword);
 
         try {
+            //changes password
             int referIndex = login.getIndexOfUsername(existingUsername);
             login.getUser(referIndex).setPassword(existingPassword);
         } catch (LoginServiceException ex) {
@@ -273,6 +290,8 @@ public class MainFrame extends javax.swing.JFrame {
         }
 
         JOptionPane.showMessageDialog(rootPane, "Done!");
+        //updates the file with new info
+        login.updateFile();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     
